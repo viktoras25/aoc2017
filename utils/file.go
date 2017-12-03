@@ -17,3 +17,14 @@ func FileGetContents(filename string) string {
 	scanner.Scan()
 	return scanner.Text()
 }
+
+func FileGetLines(filename string) []string {
+	result := []string{}
+
+	scanner := bufio.NewScanner(Fopen(filename))
+	for scanner.Scan() {
+		result = append(result, scanner.Text())
+	}
+
+	return result
+}
