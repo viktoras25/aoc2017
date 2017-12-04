@@ -3,12 +3,10 @@ package main
 import "fmt"
 import "math"
 
-// import "viktoras.de/aoc2017/utils"
+type grid [][]int
 
 func main() {
 	number := 289326
-
-	//number = 1024
 
 	fmt.Println(task1(number))
 	fmt.Println(task2(number))
@@ -44,16 +42,18 @@ func task1(number int) int {
 	return distance
 }
 
-func task2(number int) int {
-	// step := 1
+func calcCell(grid grid, r, c int) {
+	grid[r][c] = grid[r-1][c-1] + grid[r-1][c] + grid[r-1][c+1] + grid[r][c-1] + grid[r][c+1] + grid[r+1][c-1] + grid[r+1][c+1] + grid[r+1][c]
+}
 
-	grid := [][]int{}
-	for i := 0; i < 100; i++ {
-		grid = append(grid, make([]int, 100))
+func task2(number int) int {
+	grid := grid{}
+	for i := 0; i < 12; i++ {
+		grid = append(grid, make([]int, 12))
 	}
 
-	r := 50
-	c := 50
+	r := 5
+	c := 5
 
 	grid[r][c] = 1
 
@@ -63,46 +63,38 @@ func task2(number int) int {
 
 		// Up
 		for grid[r][c-1] != 0 {
-			grid[r][c] = grid[r-1][c-1] + grid[r-1][c] + grid[r-1][c+1] + grid[r][c-1] + grid[r][c+1] + grid[r+1][c-1] + grid[r+1][c+1] + grid[r+1][c]
-			// fmt.Println(r, c, grid[r][c])
-			// fmt.Println(grid[r-1][c-1], grid[r-1][c], grid[r-1][c+1], grid[r][c-1], grid[r][c+1], grid[r+1][c-1], grid[r+1][c+1], grid[r+1][c])
+			calcCell(grid, r, c)
 			r--
 		}
 
 		// Top right corner
-		grid[r][c] = grid[r-1][c-1] + grid[r-1][c] + grid[r-1][c+1] + grid[r][c-1] + grid[r][c+1] + grid[r+1][c-1] + grid[r+1][c+1] + grid[r+1][c]
-
-		c--
+		calcCell(grid, r, c)
 
 		for grid[r+1][c] != 0 {
-			grid[r][c] = grid[r-1][c-1] + grid[r-1][c] + grid[r-1][c+1] + grid[r][c-1] + grid[r][c+1] + grid[r+1][c-1] + grid[r+1][c+1] + grid[r+1][c]
 			c--
+			calcCell(grid, r, c)
 		}
 
 		// Top left corner
-		grid[r][c] = grid[r-1][c-1] + grid[r-1][c] + grid[r-1][c+1] + grid[r][c-1] + grid[r][c+1] + grid[r+1][c-1] + grid[r+1][c+1] + grid[r+1][c]
-
-		r++
+		calcCell(grid, r, c)
 
 		for grid[r][c+1] != 0 {
-			grid[r][c] = grid[r-1][c-1] + grid[r-1][c] + grid[r-1][c+1] + grid[r][c-1] + grid[r][c+1] + grid[r+1][c-1] + grid[r+1][c+1] + grid[r+1][c]
 			r++
+			calcCell(grid, r, c)
 		}
 
 		// Bottom left corner
-		grid[r][c] = grid[r-1][c-1] + grid[r-1][c] + grid[r-1][c+1] + grid[r][c-1] + grid[r][c+1] + grid[r+1][c-1] + grid[r+1][c+1] + grid[r+1][c]
-
-		c++
+		calcCell(grid, r, c)
 
 		for grid[r-1][c] != 0 {
-			grid[r][c] = grid[r-1][c-1] + grid[r-1][c] + grid[r-1][c+1] + grid[r][c-1] + grid[r][c+1] + grid[r+1][c-1] + grid[r+1][c+1] + grid[r+1][c]
 			c++
+			calcCell(grid, r, c)
 		}
 	}
 
-	for i := 40; i < 60; i++ {
-		for j := 40; j < 60; j++ {
-			fmt.Print(grid[i][j], " ")
+	for i := 1; i < 10; i++ {
+		for j := 1; j < 10; j++ {
+			fmt.Printf("%7d\t", grid[i][j])
 		}
 		fmt.Println(" ")
 	}
