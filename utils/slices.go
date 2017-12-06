@@ -1,5 +1,7 @@
 package utils
 
+import "strconv"
+
 func MinInt(list []int) int {
 	if len(list) == 0 {
 		panic("Empty list")
@@ -28,4 +30,15 @@ func MaxInt(list []int) int {
 	}
 
 	return max
+}
+
+func StringsToInts(strings []string) []int {
+	result := []int{}
+
+	for _, string := range strings {
+		number, _ := strconv.Atoi(string)
+		result = append(result, number)
+	}
+
+	return result
 }
