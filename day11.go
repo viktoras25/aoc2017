@@ -38,9 +38,7 @@ func main() {
 	fmt.Println("Part 2", utils.MaxInt(distances))
 }
 
-func getDistance(x, y int) (distance int) {
-	distance = 0
-
+func getDistance(x, y int) int {
 	if y > x {
 		x, y = y, x
 	}
