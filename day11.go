@@ -4,43 +4,29 @@ import "fmt"
 import "strings"
 import "viktoras.de/aoc2017/utils"
 
-const (
-	D_N  = "n"
-	D_NE = "ne"
-	D_NW = "nw"
-	D_S  = "s"
-	D_SE = "se"
-	D_SW = "sw"
-)
-
-type direction string
-type directions []direction
-
 func main() {
-	solve(strings.Split(utils.FileGetContents("input11.txt"), ","))
-}
+	input := strings.Split(utils.FileGetContents("input11.txt"), ",")
 
-func solve(input []string) {
 	x, y := 0, 0
 
 	distances := []int{}
 
 	for _, v := range input {
 		switch v {
-		case D_N:
+		case "n":
 			y -= 2
-		case D_NE:
+		case "ne":
 			y -= 1
 			x += 1
-		case D_NW:
+		case "nw":
 			y -= 1
 			x -= 1
-		case D_S:
+		case "s":
 			y += 2
-		case D_SE:
+		case "se":
 			y += 1
 			x += 1
-		case D_SW:
+		case "sw":
 			y += 1
 			x -= 1
 		}
