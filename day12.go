@@ -13,7 +13,7 @@ func main() {
 	nodesToVisit := []int{0}
 	visitedNodes := []int{}
 
-	for {
+	for len(connections) > 0 {
 
 		for len(nodesToVisit) > 0 {
 			currentNode := nodesToVisit[0]
@@ -31,13 +31,10 @@ func main() {
 
 		nodesToVisit = []int{firstKey(connections)}
 		visitedNodes = []int{}
-
-		fmt.Println(len(connections))
-
-		break
 	}
 
 	fmt.Println("Part 1", len(groups[0]))
+	fmt.Println("Part 1", len(groups))
 }
 
 func readConnections() map[int][]int {
