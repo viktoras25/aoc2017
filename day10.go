@@ -57,6 +57,33 @@ func task2(numbers list, input string) string {
 	return hashize(numbers)
 }
 
+func knotHash(input string) string {
+	numbers := list{}
+	for i := 0; i < 256; i++ {
+		numbers = append(numbers, i)
+	}
+
+	lengths := list{}
+	for _, b := range []byte(input) {
+		lengths = append(lengths, int(b))
+	}
+
+	lengths = append(lengths, 17, 31, 73, 47, 23)
+
+	skipSize := 0
+	currentPosition := 0
+
+	for round := 0; round < 64; round++ {
+		for _, length := range lengths {
+			numbers.twist(currentPosition, length)
+			currentPosition += length + skipSize
+			skipSize++
+		}
+	}
+
+	return hashize(numbers)
+}
+
 func (l list) slice(from, to int) list {
 	length := len(l)
 

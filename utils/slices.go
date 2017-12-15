@@ -42,3 +42,10 @@ func StringsToInts(strings []string) []int {
 
 	return result
 }
+
+func ReverseInts(ints []int) {
+	length := len(ints) - 1
+	for i := 0; i < len(ints)/2; i++ {
+		ints[i], ints[length-i] = ints[length-i], ints[i]
+	}
+}
