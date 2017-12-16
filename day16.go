@@ -7,8 +7,21 @@ import "viktoras.de/aoc2017/utils"
 
 func main() {
 	commands := strings.Split(utils.FileGetContents("input16.txt"), ",")
-
 	letters := "abcdefghijklmnop"
+
+	// letters = "abcde"
+	// commands = []string{"s1", "x3/4", "pe/b"}
+
+	fmt.Println("Part 1", dance(letters, commands))
+
+	for i := 0; i < 1000000000; i++ {
+		letters = dance(letters, commands)
+	}
+
+	fmt.Println("Part 2", letters)
+}
+
+func dance(letters string, commands []string) string {
 	for _, command := range commands {
 		switch command[0] {
 		case 's':
@@ -23,10 +36,7 @@ func main() {
 		}
 	}
 
-	fmt.Println(letters)
-
-	fmt.Println("Part 1", 0)
-	fmt.Println("Part 2", 0)
+	return letters
 }
 
 func rotate(str string, offset int) string {
