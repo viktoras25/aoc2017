@@ -32,6 +32,20 @@ func MaxInt(list []int) int {
 	return max
 }
 
+func IndexOf(list []int, value int) int {
+	if len(list) == 0 {
+		panic("Empty list")
+	}
+
+	for i, v := range list {
+		if v == value {
+			return i
+		}
+	}
+
+	panic("Value not found")
+}
+
 func StringsToInts(strings []string) []int {
 	result := []int{}
 

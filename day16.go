@@ -9,12 +9,10 @@ func main() {
 	commands := strings.Split(utils.FileGetContents("input16.txt"), ",")
 	letters := "abcdefghijklmnop"
 
-	// letters = "abcde"
-	// commands = []string{"s1", "x3/4", "pe/b"}
-
 	fmt.Println("Part 1", dance(letters, commands))
 
-	for i := 0; i < 1000000000; i++ {
+	// Period from one value to the same value is experimentally found to be 60
+	for i := 0; i < 10000000%60; i++ {
 		letters = dance(letters, commands)
 	}
 
